@@ -1,0 +1,39 @@
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <h3 *ngIf="!editMode">Post Add</h3>
+        <h3 *ngIf="editMode">Post Edit</h3>
+        <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="Title">Title</label>
+                <input type="text" class="form-control" formControlName="title"/>
+                <p *ngIf="!postForm.controls['title'].valid && postForm.controls['title'].touched">*This is required.</p>
+            </div>
+            <div class="form-group">
+                <label for="desc">Description</label>
+                <textarea
+                    type="desc"
+                    class="form-control"
+                    row="4"
+                    formControlName="desc"
+                ></textarea>
+            </div>
+            <div class="form-group">
+                <label for="ImagePath">Image</label>
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    formControlName="imagePath"
+                />
+                <img class="img-responsive" src="{{ postForm.value.imagePath }}"/>
+            </div>
+            <button
+                type="button"
+                class="btn btn-success"
+                [disabled] = "!postForm.valid"
+                (click)="onSubmit()"
+            >Save</button>
+            |
+            <button type="button" class="btn btn-primary" (click)="onCancel()">Cancel</button>
+        </form>
+    </div>
+</div>
